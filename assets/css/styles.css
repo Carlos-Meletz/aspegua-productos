@@ -34,23 +34,23 @@ body{
 .info p#ong{
     font-size: 1.3rem;
 }
-.container form{
+.container .content{
     display: flex;
     flex-direction: column;
     margin: 20px;
     justify-content: center;
 }
-.container form h2{
+.container .content h2{
     text-align: center;
     font-size: 2rem;
 }
-.container form label{
+.container .content label{
     margin: 0 0 10px 10px;
 
 }
 
-.container form input,
-.container form select{
+.container .content input,
+.container .content select{
     border-radius: 5px;
     border: none;
     background-color: rgb(223, 223, 223);
@@ -62,7 +62,7 @@ body{
 .btn{
     margin: auto;
 }
-input[type="submit"]#calcular{
+input[type="button"]#calcular{
     margin-top: 15px;
     border-radius: 15px;
     height: 45px;

@@ -18,7 +18,7 @@
                 <p id="tel">Tel: 3260-6907</p>
             </div>
         </div>
-        <form action="#">
+        <div class="content">
             <h2>Créditos Productos</h2>
             <label for="">Precio del Producto</label>
             <input type="number" step="0.01" name="precio" id="precio" placeholder="Precio" required>
@@ -34,35 +34,40 @@
                 <option value="36">36 Meses</option>
             </select>
             <div class="btn">
-                <input type="submit" name="calcular" id="calcular" value="Calcular Cuota">
+                <!-- <button name="calcular" id="calcular" onclick="calcular();">Calcular Cuota</button> -->
+                <input type="button" name="calcular" id="calcular" value="Calcular Cuota" onclick="calcular();">
             </div>
-        </form>
+        </div>
         <div class="resultado" id="resultado">
-
+            <div class="cuota" id="cuota"></div><br>
+            <div class="total" id="total">
+            </div>
         </div>
     </div>
-    <script src="./assets/js/jquery.min.js"></script>
-    <script>
-        $('form').submit(function(e){
-        e.preventDefault();
-        var data = $(this).serializeArray();
-        $.ajax({
-            url: './lib/calculo.php',
-            type: 'POST',
-            data: data,
-            success: function(val){
-                document.getElementById('resultado').innerHTML = val;
-                // if(val === ""){
-                //     alert('ERROR: Recibo ya Operado!');
-                    
-                // }else{
-                //     alert("Transaccion Exitosa! Imprima Recibo.");
-                //     var idm = parseInt(val);
-                
-                // }
-            }
-        })
-    })
+    <script>       
+    function calcular(){
+        let precio = Number(document.getElementById("precio").value);
+        let plazo = Number(document.getElementById("plazo").value);
+        let cuotaDiv = document.getElementById("cuota");
+        let totalDiv = document.getElementById("total");
+        let tasa =  43 / 100 / 12;
+
+        let credito = Number(( 1 + ( 5.264 / 100 )) * precio);
+        let cuota = credito * ( tasa / (1 - Math.pow(1 + tasa, plazo * -1)));
+
+        cuotaDiv.innerHTML = `<label>Cuota:<b> Q ${aprox(cuota)}</b></label>`;
+        totalDiv.innerHTML = `<label>Total a Pagar:<b> Q ${aprox(cuota) * plazo}</b></label>`;
+    }
+
+    function aprox(num){
+        let entero = parseInt(num / 5);
+        let decimal = num - (num % 10);
+        if(decimal > 0){
+            return (entero * 5) + 5; 
+        }else{
+            return (entero * 5);
+        }
+    }
     </script>
 </body>
 </html>
