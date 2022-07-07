@@ -44,10 +44,24 @@
             </div>
         </div>
     </div>
-    <script>       
-    function calcular(){
-        let precio = Number(document.getElementById("precio").value);
-        let plazo = Number(document.getElementById("plazo").value);
+    <script>
+        let precio = document.getElementById("precio");
+        let plazo = document.getElementById("plazo");
+        let btn = document.getElementById("calcular");
+    
+    btn.addEventListener('click', () => {
+        calcular(precio, plazo);
+    })
+    plazo.addEventListener('change', () => {
+        calcular(precio, plazo);
+    })
+    precio.addEventListener('keyup', () => {
+        calcular(precio, plazo);
+    })
+
+    function calcular(pre, pla){
+        let precio = Number(pre.value);
+        let plazo = Number(pla.value);
         let cuotaDiv = document.getElementById("cuota");
         let totalDiv = document.getElementById("total");
         let tasa =  43 / 100 / 12;
